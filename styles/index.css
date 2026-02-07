@@ -26,12 +26,11 @@ h3 {
     margin-bottom: 0.5rem;
 }
 
-/* Menu grid with flexbox */
+/* Menu grid with CSS Grid */
 .menu-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
-    justify-content: center;
     padding: 2rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
