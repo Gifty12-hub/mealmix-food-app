@@ -86,11 +86,10 @@ h3 {
 /* Responsive: stack cards on small screens */
 @media (max-width: 768px) {
     .menu-grid {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
     }
 
     .food-card {
-        width: 90%;
+        width: 100%;
     }
 }

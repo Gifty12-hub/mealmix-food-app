@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Jollof Rice & Chicken",
+        "price": 45,
+        "image": "https://picsum.photos/id/292/300/200"
+    },
+    {
+        "name": "Waakye with Stew & Eggs",
+        "price": 35,
+        "image": "https://picsum.photos/id/1080/300/200"
+    }
+]
