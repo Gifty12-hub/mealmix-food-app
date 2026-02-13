@@ -1,30 +1,24 @@
-document.addEventListener('DOMContentLoaded', () => {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+import { meals } from "./data.js";
 
-    const buttons = document.querySelectorAll('.add-to-cart');
+const container = document.getElementById("featured-meals") ||
+    document.getElementById("menu-items");
 
-    buttons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const card = event.target.closest('.food-card');
-            const foodName = card.querySelector('h3').textContent;
-            const priceText = card.querySelector('.price').textContent;
-            const price = Number(priceText.replace('GH₵', ''));
-
-            const item = {
-                name: foodName,
-                price: price
-            };
-
-            cart.push(item);
-            localStorage.setItem('cart', JSON.stringify(cart));
-
-            button.textContent = 'Added!';
-            button.style.backgroundColor = '#4caf50';
-
-            setTimeout(() => {
-                button.textContent = 'Add to Cart';
-                button.style.backgroundColor = '#388e3c';
-            }, 1500);
-        });
+if (container) {
+    meals.forEach(meal => {
+        container.innerHTML += `
+      <div class="meal-card">
+        <img src="${meal.image}" width="150">
+        <h3>${meal.name}</h3>
+        <p>GHS ${meal.price}</p>
+        <button onclick="addToCart(${meal.id})">Add to Cart</button>
+      </div>
+    `;
     });
-});
+}
+
+window.addToCart = function (id) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Added to cart!");
+}

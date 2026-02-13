@@ -8,12 +8,12 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f9f9f9;
+    background-color: #5d95a6;
     color: #333;
 }
 
 header {
-    background-color: #d32f2f;
+    background-color: #3da156;
     /* Red accent for food theme */
     color: white;
     text-align: center;
@@ -92,4 +92,31 @@ h3 {
     .food-card {
         width: 100%;
     }
+}
+
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+
+.meal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.meal-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+button {
+    background: orange;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
 }
