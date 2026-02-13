@@ -21,13 +21,44 @@
     </header>
 
     <section class="categories">
-        <button>Breakfast</button>
-        <button>Lunch</button>
-        <button>Dinner</button>
-        <button>Drinks</button>
+        <button data-category="Breakfast">Breakfast</button>
+        <button data-category="Lunch">Lunch</button>
+        <button data-category="Dinner">Dinner</button>
+        <button data-category="Drinks">Drinks</button>
     </section>
 
-    <section id="featured-meals" class="meal-grid"></section>
+
+    <section id="featured-meals" class="meal-grid">
+    
+        <div class="meal-card">
+            <img src="images/jollof.jpg" alt="Jollof Rice">
+            <h3>Jollof Rice with Chicken</h3>
+            <p class="price">GHS 35</p>
+            <button onclick="addToCart(1)">Add to Cart</button>
+        </div>
+    
+        <div class="meal-card">
+            <img src="images/waakye.jpg" alt="Waakye">
+            <h3>Waakye Special</h3>
+            <p class="price">GHS 30</p>
+            <button onclick="addToCart(2)">Add to Cart</button>
+        </div>
+    
+        <div class="meal-card">
+            <img src="images/tilapia.jpg" alt="Tilapia">
+            <h3>Grilled Tilapia & Banku</h3>
+            <p class="price">GHS 50</p>
+            <button onclick="addToCart(3)">Add to Cart</button>
+        </div>
+    
+        <div class="meal-card">
+            <img src="images/sobolo.jpg" alt="Sobolo">
+            <h3>Sobolo Drink</h3>
+            <p class="price">GHS 10</p>
+            <button onclick="addToCart(4)">Add to Cart</button>
+        </div>
+    
+    </section>
 
     <script type="module" src="script/index.js"></script>
 </body>

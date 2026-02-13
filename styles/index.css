@@ -120,3 +120,57 @@ button {
     border-radius: 5px;
     cursor: pointer;
 }
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ff7f11;
+    padding: 15px 30px;
+    color: white;
+}
+
+/* Logo */
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Search bar */
+header input {
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    width: 250px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    color: #222;
+}
+
+.categories button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #74bd26;
+    cursor: pointer;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.categories button.active {
+    background-color: #ff7f11;
+    color: white;
+}
