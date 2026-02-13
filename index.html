@@ -3,64 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MealMix - Food Ordering App</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Meal Mix - Home</title>
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
+
     <header>
-        <h1>MealMix 🍲</h1>
-        <p>Order your favorite meals easily</p>
-        <p>🛒 Cart: <span id="cart-count">0</span> items</p>
+        <h1>🍽️ Meal Mix</h1>
+        <input type="text" id="search" placeholder="Search meals...">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="cart.html">Cart</a>
+            <a href="account.html">Account</a>
+        </nav>
     </header>
-    <main>
-        <section id="menu">
-            <h2>Our Menu</h2>
-            <div class="menu-grid">
-                <!-- Food Item 1 -->
-                <div class="food-card">
-                    <img src="https://picsum.photos/id/292/300/200" alt="Jollof Rice">
-                    <h3>Jollof Rice & Chicken</h3>
-                    <p class="price">GH₵ 45.00</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-    
-                <!-- Food Item 2 -->
-                <div class="food-card">
-                    <img src="https://picsum.photos/id/1080/300/200" alt="Waakye">
-                    <h3>Waakye with Stew & Eggs</h3>
-                    <p class="price">GH₵ 35.00</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-    
-                <!-- Food Item 3 -->
-                <div class="food-card">
-                    <img src="https://picsum.photos/id/292/300/200" alt="Banku & Tilapia">
-                    <h3>Banku & Grilled Tilapia</h3>
-                    <p class="price">GH₵ 55.00</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-    
-                <!-- Food Item 4 -->
-                <div class="food-card">
-                    <img src="https://picsum.photos/id/488/300/200" alt="Fried Rice">
-                    <h3>Vegetable Fried Rice</h3>
-                    <p class="price">GH₵ 40.00</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-    
-                <!-- Food Item 5 -->
-                <div class="food-card">
-                    <img src="https://picsum.photos/id/1060/300/200" alt="Fufu & Soup">
-                    <h3>Fufu with Light Soup</h3>
-                    <p class="price">GH₵ 50.00</p>
-                    <button class="add-to-cart">Add to Cart</button>
-                </div>
-            </div>
-        </section>
-    </main>
-    <script src="index.js"></script>
+
+    <section class="categories">
+        <button>Breakfast</button>
+        <button>Lunch</button>
+        <button>Dinner</button>
+        <button>Drinks</button>
+    </section>
+
+    <section id="featured-meals" class="meal-grid"></section>
+
+    <script type="module" src="script/index.js"></script>
 </body>
 
 </html>
