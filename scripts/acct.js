@@ -1,3 +1,13 @@
+// footer //
+const currentYear = new Date().getFullYear();
+const yearElem = document.getElementById("currentyear");
+if (yearElem) yearElem.innerHTML = currentYear;
+
+const lastModified = document.lastModified;
+const modifiedElem = document.getElementById("lastModified");
+if (modifiedElem) modifiedElem.innerHTML = "Last Modified: " + lastModified;
+
+
 // scripts/acct.js
 
 // Mock user data (in real app use backend + localStorage/session)
