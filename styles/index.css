@@ -299,50 +299,6 @@ footer p {
     color: #27ae60;
 }
 
-/* ================ Responsive Adjustments ================ */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        padding: 1.2rem;
-    }
-
-    nav {
-        margin-top: 1rem;
-    }
-
-    nav a {
-        margin: 0 0.8rem;
-        font-size: 0.95rem;
-    }
-
-    .hero {
-        height: 50vh;
-        min-height: 320px;
-    }
-
-    .hero h2 {
-        font-size: 2.4rem;
-    }
-
-    .hero p {
-        font-size: 1.1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .categories button {
-        padding: 0.6rem 1.1rem;
-        font-size: 0.95rem;
-    }
-
-    .meal-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .meal-card img {
-        height: 200px;
-    }
-}
 
 /* Cart badge in nav */
 .cart-badge {
@@ -470,17 +426,7 @@ main.meal-grid {
     background: #1e8449;
 }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
-    .hero {
-        height: 35vh;
-        min-height: 220px;
-    }
 
-    .hero h2 {
-        font-size: 2.2rem;
-    }
-}
 
 /* Cart page styles */
 .cart-container {
@@ -725,22 +671,7 @@ main.meal-grid {
     background: #bdc3c7;
 }
 
-/* Mobile adjustments */
-@media (max-width: 768px) {
-    .cart-item {
-        flex-direction: column;
-        text-align: center;
-    }
 
-    .cart-item img {
-        margin: 0 0 1rem 0;
-    }
-
-    .cart-item-actions {
-        align-items: center;
-        width: 100%;
-    }
-}
 
 /* Account page styles */
 .account-container {
@@ -838,12 +769,6 @@ main.meal-grid {
     margin-bottom: 0.5rem;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    .address-group {
-        flex-direction: column;
-    }
-}
 
 .spinner {
     border: 6px solid #f3f3f3;

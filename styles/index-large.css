@@ -1,0 +1,80 @@
+/* ================ Responsive Adjustments ================ */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1.2rem;
+    }
+
+    nav {
+        margin-top: 1rem;
+    }
+
+    nav a {
+        margin: 0 0.8rem;
+        font-size: 0.95rem;
+    }
+
+    .hero {
+        height: 50vh;
+        min-height: 320px;
+    }
+
+    .hero h2 {
+        font-size: 2.4rem;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories button {
+        padding: 0.6rem 1.1rem;
+        font-size: 0.95rem;
+    }
+
+    .meal-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-card img {
+        height: 200px;
+    }
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+    .hero {
+        height: 35vh;
+        min-height: 220px;
+    }
+
+    .hero h2 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cart-item img {
+        margin: 0 0 1rem 0;
+    }
+
+    .cart-item-actions {
+        align-items: center;
+        width: 100%;
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .address-group {
+        flex-direction: column;
+    }
+}
