@@ -430,7 +430,7 @@ main.meal-grid {
 /* Better spacing for menu hero */
 .hero {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('images/menu-hero.jpg') center/cover;
+        url('../images/jollof.webp') center/cover;
     /* optional background */
 }
 
