@@ -7,12 +7,82 @@ const searchInput = document.getElementById("search");
 let cart = JSON.parse(localStorage.getItem("mealMixCart")) || [];
 let currentData = []; // stores the currently loaded items (meals or drinks)
 
+// Static fallback Ghanaian dishes (your original local list)
+const yourStaticGhanaianArray = [
+    {
+        idMeal: 1001,
+        strMeal: "Jollof Rice with Chicken",
+        strMealThumb: "images/jollof.jpg",
+        strCategory: "Lunch"
+    },
+    {
+        idMeal: 1002,
+        strMeal: "Waakye Special",
+        strMealThumb: "images/waakye.jpg",
+        strCategory: "Breakfast"
+    },
+    {
+        idMeal: 1003,
+        strMeal: "Fufu with Goat Light Soup",
+        strMealThumb: "images/fufu-light-soup.jpg",
+        strCategory: "Dinner"
+    },
+    {
+        idMeal: 1004,
+        strMeal: "Banku & Okro Soup with Fish",
+        strMealThumb: "images/banku-okro.jpg",
+        strCategory: "Dinner"
+    },
+    {
+        idMeal: 1005,
+        strMeal: "Red Red with Plantain & Avocado",
+        strMealThumb: "images/red-red.jpg",
+        strCategory: "Lunch"
+    },
+    {
+        idMeal: 1006,
+        strMeal: "Spicy Kelewele",
+        strMealThumb: "images/kelewele.jpg",
+        strCategory: "Snacks"
+    },
+    {
+        idMeal: 1007,
+        strMeal: "Kenkey with Fish & Shito",
+        strMealThumb: "images/kenkey-fish.jpg",
+        strCategory: "Lunch"
+    },
+    {
+        idMeal: 1008,
+        strMeal: "Groundnut Soup with Chicken",
+        strMealThumb: "images/peanut-soup.jpg",
+        strCategory: "Dinner"
+    },
+    {
+        idMeal: 1009,
+        strMeal: "Tuo Zaafi with Ayoyo Soup",
+        strMealThumb: "images/tuo-zaafi.jpg",
+        strCategory: "Dinner"
+    },
+    {
+        idMeal: 1010,
+        strMeal: "Boiled Yam with Kontomire Stew",
+        strMealThumb: "images/yam-kontomire.jpg",
+        strCategory: "Lunch"
+    }
+];
+
+// Ghanaian-focused search terms (for TheMealDB)
+const ghanaianFoodKeywords = [
+    "jollof", "waakye", "fufu", "banku", "red red", "kenkey", "groundnut", "peanut soup",
+    "okro", "tilapia", "kelewele", "yam", "kontomire", "light soup", "tuo zaafi", "ayoyo"
+];
+
 // Helper: Save cart
 function saveCart() {
     localStorage.setItem("mealMixCart", JSON.stringify(cart));
 }
 
-// Add to cart (works for both meal.idMeal and drink.idDrink → we use idMeal/idDrink as id)
+// Add to cart (works for both meal.idMeal and drink.idDrink)
 window.addToCart = function (id) {
     let item = cart.find(i => i.id === id);
     if (item) item.quantity = (item.quantity || 1) + 1;
@@ -35,38 +105,56 @@ function renderMeals(list) {
     }
 
     list.forEach(item => {
+        const name = item.strMeal || item.strDrink || "Unknown Dish";
+        const thumb = item.strMealThumb || item.strDrinkThumb || "https://via.placeholder.com/300x200?text=Ghanaian+Food";
+        const id = item.idMeal || item.idDrink || Date.now();
+
         const card = document.createElement("div");
         card.className = "meal-card";
         card.innerHTML = `
-            <img src="${item.strMealThumb || item.strDrinkThumb}" alt="${item.strMeal || item.strDrink}" loading="lazy">
-            <h3>${item.strMeal || item.strDrink}</h3>
-            <p class="price">GHS ${(Math.random() * 30 + 10).toFixed(2)}</p> <!-- mock price -->
-            <button onclick="addToCart(${item.idMeal || item.idDrink})">Add to Cart</button>
+            <img src="${thumb}" alt="${name}" loading="lazy">
+            <h3>${name}</h3>
+            <p class="price">GHS ${(Math.random() * 30 + 15).toFixed(2)}</p>
+            <button onclick="addToCart(${id})">Add to Cart</button>
         `;
         container.appendChild(card);
     });
 }
 
-// Fetch meals from TheMealDB
-async function fetchMeals(category = 'All') {
+// Fetch Ghanaian-relevant meals from TheMealDB with fallback
+async function fetchGhanaianMeals() {
+    container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:4rem;"><div class="spinner"></div>Loading local Ghanaian dishes...</div>';
+
     try {
-        let url;
-        if (category === 'All') {
-            url = 'https://www.themealdb.com/api/json/v1/1/search.php?s='; // broad search (limited results)
-        } else {
-            url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
+        // Search for multiple Ghanaian terms in parallel
+        const searches = ghanaianFoodKeywords.map(async (keyword) => {
+            const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${keyword}`);
+            const data = await res.json();
+            return data.meals || [];
+        });
+
+        const allResults = await Promise.all(searches);
+        let combined = allResults.flat();  // all API results together
+
+        // Fallback to static Ghanaian dishes if too few results from API
+        if (combined.length < 5) {
+            // Simple dedupe by name to avoid duplicates
+            const existingNames = new Set(combined.map(m => (m.strMeal || "").toLowerCase()));
+            const uniqueStatic = yourStaticGhanaianArray.filter(s =>
+                !existingNames.has((s.strMeal || "").toLowerCase())
+            );
+            combined = combined.concat(uniqueStatic);
         }
 
-        const res = await fetch(url);
-        const data = await res.json();
-        let meals = data.meals || [];
-
-        // Fetch full details (2nd endpoint) for richer info
+        // Optional: Fetch full details for some items (2nd endpoint)
         const detailed = await Promise.all(
-            meals.slice(0, 12).map(async (m) => { // limit to avoid too many requests
-                const detailRes = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${m.idMeal}`);
-                const detail = await detailRes.json();
-                return detail.meals?.[0] || m;
+            combined.slice(0, 12).map(async (m) => {
+                if (!m.strInstructions) { // only fetch if basic info
+                    const detail = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${m.idMeal}`);
+                    const d = await detail.json();
+                    return d.meals?.[0] || m;
+                }
+                return m;
             })
         );
 
@@ -74,38 +162,47 @@ async function fetchMeals(category = 'All') {
         renderMeals(detailed);
     } catch (err) {
         console.error("MealDB error:", err);
-        container.innerHTML = '<p style="color:#e74c3c; text-align:center;">Error loading meals. Try again.</p>';
+        // Fallback even on error
+        currentData = yourStaticGhanaianArray;
+        renderMeals(yourStaticGhanaianArray);
     }
 }
 
 // Fetch drinks from TheCocktailDB
 async function fetchDrinks() {
+    container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:4rem;"><div class="spinner"></div>Loading refreshing drinks...</div>';
+
     try {
-        // Endpoint 1: Filter by category (e.g., Non_Alcoholic for mocktails like Sobolo-style)
-        const filterUrl = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic'; // or 'c=Cocktail'
+        // Try hibiscus first (closest to sobolo/bissap)
+        let res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Hibiscus');
+        let data = await res.json();
+        let drinks = data.drinks || [];
 
-        const filterRes = await fetch(filterUrl);
-        const filterData = await filterRes.json();
-        let drinks = filterData.drinks || [];
+        // Fallback to ginger or non-alcoholic if nothing found
+        if (!drinks.length) {
+            res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Ginger');
+            data = await res.json();
+            drinks = data.drinks || [];
+        }
 
-        // Endpoint 2: Get full details (ingredients, instructions, etc.)
-        const detailedDrinks = await Promise.all(
-            drinks.slice(0, 12).map(async (d) => {
+        // Full details
+        const detailed = await Promise.all(
+            drinks.slice(0, 10).map(async (d) => {
                 const detailRes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${d.idDrink}`);
-                const detail = await detailRes.json();
-                return detail.drinks?.[0] || d;
+                const dData = await detailRes.json();
+                return dData.drinks?.[0] || d;
             })
         );
 
-        currentData = detailedDrinks;
-        renderMeals(detailedDrinks);
+        currentData = detailed;
+        renderMeals(detailed);
     } catch (err) {
         console.error("CocktailDB error:", err);
-        container.innerHTML = '<p style="color:#e74c3c; text-align:center;">Error loading drinks. Try again.</p>';
+        container.innerHTML = '<p style="color:#e74c3c; text-align:center;">Could not load drinks. Try again.</p>';
     }
 }
 
-// Category click handler – switch API based on category
+// Category click handler
 categoryBtns.forEach(btn => {
     btn.addEventListener("click", () => {
         categoryBtns.forEach(b => b.classList.remove("active"));
@@ -114,14 +211,14 @@ categoryBtns.forEach(btn => {
         const category = btn.dataset.category;
 
         if (category === "Drinks") {
-            fetchDrinks(); // Use TheCocktailDB
+            fetchDrinks();
         } else {
-            fetchMeals(category); // Use TheMealDB
+            fetchGhanaianMeals();
         }
     });
 });
 
-// Live search (filters the current loaded data)
+// Live search on current data
 searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase().trim();
     const filtered = currentData.filter(item =>
@@ -130,7 +227,5 @@ searchInput.addEventListener("input", (e) => {
     renderMeals(filtered);
 });
 
-// Initial load – show All meals from TheMealDB
-fetchMeals('All');
-
-container.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+// Initial load: Ghanaian-focused meals
+fetchGhanaianMeals();

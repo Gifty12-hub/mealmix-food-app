@@ -5,7 +5,7 @@ import { meals } from "./data.js";
 // ────────────────────────────────────────────────
 // DOM Elements
 // ────────────────────────────────────────────────
-const container = document.getElementById("featured-meals");
+const container = document.getElementById("dynamic-meals");
 const categoryButtons = document.querySelectorAll(".categories button");
 const searchInput = document.getElementById("search");
 
