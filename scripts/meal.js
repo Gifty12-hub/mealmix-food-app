@@ -8,6 +8,17 @@ const modifiedElem = document.getElementById("lastModified");
 if (modifiedElem) modifiedElem.innerHTML = "Last Modified: " + lastModified;
 
 
+const mainnav = document.querySelector('.navbar');
+const hambutton = document.querySelector('#menu');
+
+if (mainnav && hambutton) {
+    hambutton.addEventListener('click', () => {
+        mainnav.classList.toggle('open');
+        hambutton.classList.toggle('open');
+    });
+}
+
+
 // scripts/meal.js
 
 const container = document.getElementById("menu-items");
@@ -22,69 +33,75 @@ const yourStaticGhanaianArray = [
     {
         idMeal: 1001,
         strMeal: "Jollof Rice with Chicken",
-        strMealThumb: "images/jollof.jpg",
+        strMealThumb: "images/jollof.webp",
         strCategory: "Lunch"
     },
     {
         idMeal: 1002,
         strMeal: "Waakye Special",
-        strMealThumb: "images/waakye.jpg",
+        strMealThumb: "images/waakye.webp",
         strCategory: "Breakfast"
     },
     {
         idMeal: 1003,
         strMeal: "Fufu with Goat Light Soup",
-        strMealThumb: "images/fufu-light-soup.jpg",
+        strMealThumb: "images/fufu.webp",
         strCategory: "Dinner"
     },
     {
         idMeal: 1004,
         strMeal: "Banku & Okro Soup with Fish",
-        strMealThumb: "images/banku-okro.jpg",
+        strMealThumb: "images/banku.webp",
         strCategory: "Dinner"
     },
     {
         idMeal: 1005,
         strMeal: "Red Red with Plantain & Avocado",
-        strMealThumb: "images/red-red.jpg",
+        strMealThumb: "images/redred.webp",
         strCategory: "Lunch"
     },
     {
         idMeal: 1006,
         strMeal: "Spicy Kelewele",
-        strMealThumb: "images/kelewele.jpg",
+        strMealThumb: "images/kelewele.webp",
         strCategory: "Snacks"
     },
     {
         idMeal: 1007,
         strMeal: "Kenkey with Fish & Shito",
-        strMealThumb: "images/kenkey-fish.jpg",
+        strMealThumb: "images/kenkey.webp",
         strCategory: "Lunch"
     },
     {
         idMeal: 1008,
         strMeal: "Groundnut Soup with Chicken",
-        strMealThumb: "images/peanut-soup.jpg",
+        strMealThumb: "images/peanut.webp",
         strCategory: "Dinner"
     },
     {
         idMeal: 1009,
         strMeal: "Tuo Zaafi with Ayoyo Soup",
-        strMealThumb: "images/tuo-zaafi.jpg",
+        strMealThumb: "images/tuo.webp",
         strCategory: "Dinner"
     },
     {
         idMeal: 1010,
         strMeal: "Boiled Yam with Kontomire Stew",
-        strMealThumb: "images/yam-kontomire.jpg",
+        strMealThumb: "images/yam.webp",
         strCategory: "Lunch"
+    },
+    {
+        idMeal: 1011,
+        strMeal: "Pineapple Ginger Sobolo",
+        strMealThumb: "images/sobolo.webp",
+        strCategory: "Drinks"
     }
 ];
 
 // Ghanaian-focused search terms (for TheMealDB)
 const ghanaianFoodKeywords = [
     "jollof", "waakye", "fufu", "banku", "red red", "kenkey", "groundnut", "peanut soup",
-    "okro", "tilapia", "kelewele", "yam", "kontomire", "light soup", "tuo zaafi", "ayoyo"
+    "okro", "tilapia", "kelewele", "yam", "kontomire", "light soup", "tuo zaafi", "ayoyo", "sobolo",
 ];
 
 // Helper: Save cart

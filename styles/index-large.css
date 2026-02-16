@@ -1,4 +1,25 @@
 /* ================ Responsive Adjustments ================ */
+@media (min-width: 840px) {
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .navbar {
+        flex-direction: row;
+    }
+
+    .navbar a {
+        display: block;
+        flex: 2 1 100%;
+    }
+
+    #menu {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     header {
         flex-direction: column;

@@ -8,6 +8,17 @@ const modifiedElem = document.getElementById("lastModified");
 if (modifiedElem) modifiedElem.innerHTML = "Last Modified: " + lastModified;
 
 
+const mainnav = document.querySelector('.navbar');
+const hambutton = document.querySelector('#menu');
+
+if (mainnav && hambutton) {
+  hambutton.addEventListener('click', () => {
+    mainnav.classList.toggle('open');
+    hambutton.classList.toggle('open');
+  });
+}
+
+
 // scripts/acct.js
 
 // Mock user data (in real app use backend + localStorage/session)
