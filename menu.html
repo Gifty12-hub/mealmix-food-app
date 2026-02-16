@@ -1,26 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu - Meal Mix</title>
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
+
     <header>
         <h1>🍽️ Meal Mix</h1>
+        <input type="text" id="search" placeholder="Search meals...">
         <nav>
             <a href="index.html">Home</a>
-            <a href="index.html">Menu</a>
+            <a href="menu.html">Menu</a>
             <a href="cart.html">Cart</a>
             <a href="account.html">Account</a>
         </nav>
     </header>
 
-    <h2>Our Menu</h2>
-    <section id="menu-items" class="meal-grid"></section>
+    <section class="hero" style="height: 40vh; min-height: 300px;">
+        <div class="hero-content">
+            <h2>Our Full Menu</h2>
+            <p>Discover authentic Ghanaian dishes — freshly prepared and ready for delivery in Kasoa.</p>
+        </div>
+    </section>
 
-    <script type="module" src="scripts/index.js"></script>
+    <section class="categories">
+        <button data-category="all" class="active">All</button>
+        <button data-category="Breakfast">Breakfast</button>
+        <button data-category="Lunch">Lunch</button>
+        <button data-category="Dinner">Dinner</button>
+        <button data-category="Drinks">Drinks</button>
+        <button data-category="Snacks">Snacks</button>
+    </section>
+
+    <main id="menu-items" class="meal-grid"></main>
+
+    <section class="cta">
+        <h2>Ready to Order?</h2>
+        <p>Add your favourites to the cart and enjoy fast delivery!</p>
+        <a href="cart.html" class="btn">View Cart</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Meal Mix • Authentic Ghanaian Cuisine • Kasoa, Ghana</p>
+        <p>Contact: +233 123 456 789 | info@mealmix.gh</p>
+        <div class="social">
+            <a href="#">Facebook</a> • <a href="#">Instagram</a> • <a href="#">WhatsApp</a>
+        </div>
+    </footer>
+    <script type="module" src="scripts/meal.js"></script>
+
 </body>
-
 </html>

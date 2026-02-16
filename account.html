@@ -1,37 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account - Meal Mix</title>
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
+
     <header>
         <h1>🍽️ Meal Mix</h1>
+        <input type="text" id="search" placeholder="Search meals..." disabled>
         <nav>
             <a href="index.html">Home</a>
-            <a href="index.html">Menu</a>
+            <a href="menu.html">Menu</a>
             <a href="cart.html">Cart</a>
-            <a href="account.html">Account</a>
+            <a href="account.html" class="active">Account</a>
         </nav>
     </header>
 
-    <h2>User Account</h2>
+    <section class="hero" style="height: 35vh; min-height: 250px;">
+        <div class="hero-content">
+            <h2>Your Account</h2>
+            <p>Manage your profile, delivery details, and view past orders</p>
+        </div>
+    </section>
 
-    <div id="auth-section">
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
-        <button id="login">Login</button>
-    </div>
+    <main class="account-container">
 
-    <h3>Delivery Address</h3>
-    <input type="text" id="address" placeholder="Enter address">
+        <!-- Auth Section (Login / Register) -->
+        <section id="auth-section" class="auth-card">
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Register</button>
+            </div>
 
-    <h3>Order History</h3>
-    <ul id="order-history"></ul>
+            <form id="auth-form">
+                <input type="email" id="email" placeholder="Email address" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="text" id="full-name" placeholder="Full Name (for registration)" style="display:none;">
+                <button type="submit" id="auth-btn" class="btn">Login</button>
+            </form>
+
+            <p id="auth-message" style="text-align:center; margin-top:1rem; min-height:1.5rem;"></p>
+        </section>
+
+        <!-- Logged-in Profile Section (hidden until login) -->
+        <section id="profile-section" style="display:none;">
+            <div class="profile-card">
+                <h3>Welcome back, <span id="user-name">User</span>!</h3>
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+
+                <h4>Delivery Address</h4>
+                <div class="address-group">
+                    <input type="text" id="address" placeholder="Enter your full delivery address">
+                    <button id="save-address" class="btn small">Save Address</button>
+                </div>
+                <p id="address-message" style="color:#27ae60; margin-top:0.5rem;"></p>
+
+                <button id="logout" class="btn secondary">Logout</button>
+            </div>
+
+            <div class="order-history-card">
+                <h3>Order History</h3>
+                <ul id="order-history"></ul>
+                <p id="no-orders" style="text-align:center; color:#777; padding:2rem 0; display:none;">
+                    No orders yet. Start ordering your favourites!
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="cta">
+        <h2>Ready for your next meal?</h2>
+        <p>Browse our menu and enjoy fast delivery across Kasoa.</p>
+        <a href="menu.html" class="btn">Explore Menu</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Meal Mix • Authentic Ghanaian Cuisine • Accra, Ghana</p>
+        <p>Contact: +233 123 456 789 | info@mealmix.gh</p>
+        <div class="social">
+            <a href="#">Facebook</a> • <a href="#">Instagram</a> • <a href="#">WhatsApp</a>
+        </div>
+    </footer>
 
     <script type="module" src="scripts/acct.js"></script>
+
 </body>
 
 </html>

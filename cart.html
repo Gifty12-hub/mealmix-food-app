@@ -1,29 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Cart - Meal Mix</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Meal Mix</title>
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
+
     <header>
         <h1>🍽️ Meal Mix</h1>
+        <input type="text" id="search" placeholder="Search meals..." disabled>
         <nav>
             <a href="index.html">Home</a>
-            <a href="index.html">Menu</a>
+            <a href="menu.html">Menu</a>
             <a href="cart.html">Cart</a>
             <a href="account.html">Account</a>
         </nav>
     </header>
 
-    <h2>Your Cart</h2>
-    <div id="cart-items"></div>
+    <section class="hero"
+        style="height: 35vh; min-height: 250px; background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('images/cart-hero-bg.jpg') center/cover;">
+        <div class="hero-content">
+            <h2>Your Cart</h2>
+            <p>Review your Ghanaian favourites — ready for hot delivery in Kasoa!</p>
+        </div>
+    </section>
 
-    <h3>Total: GHS <span id="total"></span></h3>
-    <button id="checkout">Checkout</button>
+    <main class="cart-container">
+        <div id="cart-items" class="cart-grid"></div>
+
+        <div class="cart-summary">
+            <div class="summary-details">
+                <h3>Order Total: <span id="total">GHS 0.00</span></h3>
+                <p id="item-count">0 items</p>
+            </div>
+            <button id="checkout" class="btn" disabled>Proceed to Checkout</button>
+            <button id="clear-cart" class="btn secondary" style="display:none; margin-top:1rem;">Clear Cart</button>
+        </div>
+
+        <p id="empty-message" style="display:none; text-align:center; padding:5rem 1rem; font-size:1.4rem; color:#555;">
+            Your cart is empty right now 😔<br>
+            Head back to the <a href="menu.html">menu</a> and add some mouth-watering dishes!
+        </p>
+    </main>
+
+    <section class="cta">
+        <h2>Craving something delicious?</h2>
+        <p>We're ready to deliver authentic Ghanaian flavours straight to you.</p>
+        <a href="menu.html" class="btn">Browse Menu</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Meal Mix • Authentic Ghanaian Cuisine • Kasoa, Ghana</p>
+        <p>Contact: +233 123 456 789 | info@mealmix.gh</p>
+        <div class="social">
+            <a href="#">Facebook</a> • <a href="#">Instagram</a> • <a href="#">WhatsApp</a>
+        </div>
+    </footer>
 
     <script type="module" src="scripts/cart.js"></script>
+
 </body>
 
 </html>

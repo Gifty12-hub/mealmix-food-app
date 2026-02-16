@@ -1,12 +1,16 @@
 [
     {
-        "name": "Jollof Rice & Chicken",
-        "price": 45,
-        "image": "https://picsum.photos/id/292/300/200"
+        "id": 1,
+        "name": "Jollof Rice with Chicken",
+        "price": 35,
+        "category": "Lunch",
+        "image": "images/jollof.jpg"
     },
     {
-        "name": "Waakye with Stew & Eggs",
-        "price": 35,
-        "image": "https://picsum.photos/id/1080/300/200"
+        "id": 2,
+        "name": "Waakye Special",
+        "price": 30,
+        "category": "Breakfast",
+        "image": "images/waakye.jpg"
     }
 ]

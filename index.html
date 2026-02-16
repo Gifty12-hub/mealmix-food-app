@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Meal Mix - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Mix - Authentic Ghanaian Meals in Accra</title>
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
@@ -20,47 +21,116 @@
         </nav>
     </header>
 
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Authentic Ghanaian Flavours Delivered Fresh</h2>
+            <p>Jollof, Waakye, Fufu, Banku & more — hot and ready in Kasoa!</p>
+            <button onclick="document.getElementById('featured-meals').scrollIntoView({behavior: 'smooth'})">Explore
+                Now</button>
+        </div>
+    </section>
+
     <section class="categories">
         <button data-category="Breakfast">Breakfast</button>
         <button data-category="Lunch">Lunch</button>
         <button data-category="Dinner">Dinner</button>
         <button data-category="Drinks">Drinks</button>
+        <button data-category="Snacks">Snacks</button>
     </section>
 
+    <!-- Today's Favourites -->
+    <section class="specials">
+        <h2>🔥 Today's Favourites</h2>
+        <div class="meal-grid">
+            <div class="meal-card" data-categories="Lunch Dinner">
+                <img src="images/jollof.jpg" alt="Jollof Rice">
+                <h3>Jollof Rice with Chicken</h3>
+                <p class="price">GHS 35</p>
+                <span class="badge popular">Most Ordered</span>
+                <button onclick="addToCart(1)">Add to Cart</button>
+            </div>
 
+            <div class="meal-card" data-categories="Lunch Breakfast">
+                <img src="images/waakye.jpg" alt="Waakye">
+                <h3>Waakye Special</h3>
+                <p class="price">GHS 30</p>
+                <span class="badge popular">Classic</span>
+                <button onclick="addToCart(2)">Add to Cart</button>
+            </div>
+
+            <div class="meal-card" data-categories="Dinner">
+                <img src="images/tilapia.jpg" alt="Tilapia">
+                <h3>Grilled Tilapia & Banku</h3>
+                <p class="price">GHS 50</p>
+                <span class="badge spicy">Spicy Option</span>
+                <button onclick="addToCart(3)">Add to Cart</button>
+            </div>
+
+            <div class="meal-card" data-categories="Drinks">
+                <img src="images/sobolo.jpg" alt="Sobolo">
+                <h3>Sobolo Drink</h3>
+                <p class="price">GHS 10</p>
+                <span class="badge refresh">Refreshing</span>
+                <button onclick="addToCart(4)">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Dishes -->
     <section id="featured-meals" class="meal-grid">
-    
-        <div class="meal-card">
-            <img src="images/jollof.jpg" alt="Jollof Rice">
-            <h3>Jollof Rice with Chicken</h3>
-            <p class="price">GHS 35</p>
-            <button onclick="addToCart(1)">Add to Cart</button>
+        <h2>Our Signature Dishes</h2>
+
+        <div class="meal-card" data-categories="Dinner">
+            <img src="images/fufu-light-soup.jpg" alt="Fufu with Light Soup"> <!-- Add this image to your folder -->
+            <h3>Fufu with Goat Light Soup</h3>
+            <p class="price">GHS 45</p>
+            <span class="badge popular">Favourite</span>
+            <button onclick="addToCart(5)">Add to Cart</button>
         </div>
-    
-        <div class="meal-card">
-            <img src="images/waakye.jpg" alt="Waakye">
-            <h3>Waakye Special</h3>
-            <p class="price">GHS 30</p>
-            <button onclick="addToCart(2)">Add to Cart</button>
+
+        <div class="meal-card" data-categories="Lunch">
+            <img src="images/red-red.jpg" alt="Red Red">
+            <h3>Red Red with Plantain & Avocado</h3>
+            <p class="price">GHS 38</p>
+            <button onclick="addToCart(6)">Add to Cart</button>
         </div>
-    
-        <div class="meal-card">
-            <img src="images/tilapia.jpg" alt="Tilapia">
-            <h3>Grilled Tilapia & Banku</h3>
-            <p class="price">GHS 50</p>
-            <button onclick="addToCart(3)">Add to Cart</button>
+
+        <div class="meal-card" data-categories="Snacks">
+            <img src="images/kelewele.jpg" alt="Kelewele">
+            <h3>Spicy Kelewele</h3>
+            <p class="price">GHS 15</p>
+            <span class="badge spicy">Street Favourite</span>
+            <button onclick="addToCart(7)">Add to Cart</button>
         </div>
-    
-        <div class="meal-card">
-            <img src="images/sobolo.jpg" alt="Sobolo">
-            <h3>Sobolo Drink</h3>
-            <p class="price">GHS 10</p>
-            <button onclick="addToCart(4)">Add to Cart</button>
+
+        <div class="meal-card" data-categories="Dinner">
+            <img src="images/banku-okro.jpg" alt="Banku with Okro"> <!-- Add this image -->
+            <h3>Banku & Okro Soup with Fish</h3>
+            <p class="price">GHS 40</p>
+            <button onclick="addToCart(8)">Add to Cart</button>
         </div>
-    
+
+        <!-- More can be added here -->
     </section>
 
-    <script type="module" src="script/index.js"></script>
+    <!-- Call to Action -->
+    <section class="cta">
+        <h2>Hungry for More?</h2>
+        <p>Check out our full menu or search for your favourite dish now.</p>
+        <a href="menu.html" class="btn">View Full Menu</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Meal Mix - Authentic Ghanaian Cuisine • Kasoa, Ghana</p>
+        <p>Contact: +233 123 456 789 | info@mealmix.gh</p>
+        <div class="social">
+            <a href="#">Facebook</a> • <a href="#">Instagram</a> • <a href="#">WhatsApp</a>
+        </div>
+    </footer>
+
+    <script type="module" src="scripts/index.js"></script>
 </body>
 
 </html>
