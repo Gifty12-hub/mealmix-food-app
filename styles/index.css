@@ -113,10 +113,10 @@ nav {
     position: relative;
     height: 60vh;
     min-height: 400px;
-    background: linear-gradient(rgba(42, 59, 39, 0.097), rgba(208, 212, 81, 0.81)),
+    background: linear-gradient(rgba(17, 26, 15, 0.097), rgba(9, 13, 26, 0.81)),
         url('images/hero-food-bg.jpg') center/cover no-repeat;
     /* Add a vibrant Ghanaian food collage here */
-    color: rgb(125, 28, 132);
+    color: rgb(160, 191, 20);
     display: flex;
     align-items: center;
     justify-content: center;

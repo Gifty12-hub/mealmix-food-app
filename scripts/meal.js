@@ -27,6 +27,8 @@ const searchInput = document.getElementById("search");
 
 let cart = JSON.parse(localStorage.getItem("mealMixCart")) || [];
 let currentData = []; // stores the currently loaded items (meals or drinks)
+let allAvailableData = []; // stores all items for searching across
+let currentCategory = "all"; // track current category filter
 
 // Static fallback Ghanaian dishes (your original local list)
 const yourStaticGhanaianArray = [
@@ -38,8 +40,8 @@ const yourStaticGhanaianArray = [
     },
     {
         idMeal: 1002,
-        strMeal: "Waakye Special",
-        strMealThumb: "images/waakye.webp",
+        strMeal: "Hausa Kooko with Koose",
+        strMealThumb: "images/kooko.webp",
         strCategory: "Breakfast"
     },
     {
@@ -186,11 +188,13 @@ async function fetchGhanaianMeals() {
         );
 
         currentData = detailed;
+        allAvailableData = detailed; // Store all data for searching
         renderMeals(detailed);
     } catch (err) {
         console.error("MealDB error:", err);
         // Fallback even on error
         currentData = yourStaticGhanaianArray;
+        allAvailableData = yourStaticGhanaianArray;
         renderMeals(yourStaticGhanaianArray);
     }
 }
@@ -200,6 +204,9 @@ async function fetchDrinks() {
     container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:4rem;"><div class="spinner"></div>Loading refreshing drinks...</div>';
 
     try {
+        // Get local drinks first
+        const localDrinks = yourStaticGhanaianArray.filter(item => item.strCategory === "Drinks");
+
         // Try hibiscus first (closest to sobolo/bissap)
         let res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Hibiscus');
         let data = await res.json();
@@ -221,11 +228,18 @@ async function fetchDrinks() {
             })
         );
 
-        currentData = detailed;
-        renderMeals(detailed);
+        // Combine local drinks with API drinks
+        const combined = [...localDrinks, ...detailed];
+        currentData = combined;
+        allAvailableData = combined;
+        renderMeals(combined);
     } catch (err) {
         console.error("CocktailDB error:", err);
-        container.innerHTML = '<p style="color:#e74c3c; text-align:center;">Could not load drinks. Try again.</p>';
+        // Show local drinks if API fails
+        const localDrinks = yourStaticGhanaianArray.filter(item => item.strCategory === "Drinks");
+        currentData = localDrinks;
+        allAvailableData = localDrinks;
+        renderMeals(localDrinks);
     }
 }
 
@@ -236,21 +250,41 @@ categoryBtns.forEach(btn => {
         btn.classList.add("active");
 
         const category = btn.dataset.category;
+        currentCategory = category;
+        searchInput.value = ""; // Clear search when changing category
 
         if (category === "Drinks") {
             fetchDrinks();
+        } else if (category === "all") {
+            currentData = yourStaticGhanaianArray;
+            allAvailableData = yourStaticGhanaianArray;
+            renderMeals(yourStaticGhanaianArray);
         } else {
-            fetchGhanaianMeals();
+            // Filter by the selected category (Breakfast, Lunch, Dinner, Snacks)
+            const filtered = yourStaticGhanaianArray.filter(item => item.strCategory === category);
+            currentData = filtered;
+            allAvailableData = yourStaticGhanaianArray; // Keep all data for search
+            renderMeals(filtered);
         }
     });
 });
 
-// Live search on current data
+// Live search on all available data
 searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase().trim();
-    const filtered = currentData.filter(item =>
+
+    let searchPool = allAvailableData.length > 0 ? allAvailableData : currentData;
+
+    // If searching, search the full pool
+    let filtered = searchPool.filter(item =>
         (item.strMeal || item.strDrink || "").toLowerCase().includes(query)
     );
+
+    // If a category filter is active (not "all"), apply category filter to search results
+    if (currentCategory !== "all" && currentCategory !== "Drinks" && query) {
+        filtered = filtered.filter(item => item.strCategory === currentCategory);
+    }
+
     renderMeals(filtered);
 });
 
